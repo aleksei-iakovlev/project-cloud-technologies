@@ -33,4 +33,6 @@ helm upgrade --install --atomic test app
 
 ## Для изучения сообщений в Кафка:
 
-export MSYS_NO_PATHCONV=1 docker run     -it     --name "kcat"     --network=host     --rm     -v 'C:/Users/алексей/.kafka/YandexInternalRootCA.crt:/data/CA.pem'     edenhill/kcat:1.7.1 -b rc1a-lrqhe7mbv67kq0gu.mdb.yandexcloud.net:9091     -X security.protocol=SASL_SSL     -X sasl.mechanisms=SCRAM-SHA-512     -X sasl.username=producer_consumer     -X sasl.password="****"     -X ssl.ca.location=/data/CA.pem     -t stg-service-orders     -C     -o beginning
+export MSYS_NO_PATHCONV=1 
+docker run     -it     --name "kcat"     --network=host     --rm     -v 'C:/Users/алексей/.kafka/YandexInternalRootCA.crt:/data/CA.pem'     edenhill/kcat:1.7.1 -b rc1a-lrqhe7mbv67kq0gu.mdb.yandexcloud.net:9091     -X security.protocol=SASL_SSL     -X sasl.mechanisms=SCRAM-SHA-512     -X sasl.username=producer_consumer     -X sasl.password=""     -X ssl.ca.location=/data/CA.pem     -t stg-service-orders     -C     -o beginning
+
