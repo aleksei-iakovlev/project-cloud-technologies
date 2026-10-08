@@ -40,15 +40,36 @@ class DdsMessageProcessor:
             restaurant_id = payload["restaurant"]["id"]
             restaurant_name = payload["restaurant"]["name"]
 
+            user_id = payload["user"]["id"]
+            user_name = payload["user"]["name"]
+
+            order_id = payload["id"]
+            order_dt = payload["date"]
+
+            order_cost = payload["cost"]
+            order_payment = payload["payment"]
+            order_status = payload["status"]
+
             self._dds_repository.insert_h_restaurant(restaurant_id)
             self._dds_repository.insert_s_restaurant_names(restaurant_id, restaurant_name)
+
+            self._dds_repository.insert_s_user_names(user_id, user_name)
+
+            self._dds_repository.insert_h_order(order_id, order_dt)
+
+            self._dds_repository.insert_s_order_cost(order_id, order_cost, order_payment)
+
+            self._dds_repository.insert_s_order_status(order_id, order_status)
 
             for item in products:
                 category_name = item["category"]
                 product_id = item["id"]
+                product_name = item["name"]
                 self._dds_repository.insert_h_category(category_name)
                 self._dds_repository.insert_h_product(product_id)
                 self._dds_repository.insert_l_product_restaurant(restaurant_id, product_id)
+                self._dds_repository.insert_l_product_category(category_name, product_id)
+                self._dds_repository.insert_s_product_names(product_id, product_name)
 
             i += 1
 
