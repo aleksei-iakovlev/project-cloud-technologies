@@ -1,0 +1,31 @@
+{
+  "order_id": 11306299,
+  "user_id": "626a81ce9a8cd1920641e29d",
+  "products": [
+    {
+      "product_id": "6276e8cd0cf48b4cded0086c",
+      "product_name": "ГРИЛАТА ОВОЩНАЯ ПО-МЕКСИКАНСКИ",
+      "category_name": "Закуски"
+    },
+    {
+      "product_id": "6276e8cd0cf48b4cded00875",
+      "product_name": "КАЛЬЦОНЕ МАРГАРИТА",
+      "category_name": "Выпечка"
+    },
+    {
+      "product_id": "6276e8cd0cf48b4cded0087c",
+      "product_name": "CЭНДВИЧ С КУРИЦЕЙ BBQ",
+      "category_name": "Выпечка"
+    },
+    {
+      "product_id": "6276e8cd0cf48b4cded00873",
+      "product_name": "ПИЦЦЕТТА С ВЕТЧИНОЙ И СЫРОМ",
+      "category_name": "Выпечка"
+    },
+    {
+      "product_id": "6276e8cd0cf48b4cded00871",
+      "product_name": "КРУАССАН С ВЕТЧИНОЙ",
+      "category_name": "Выпечка"
+    }
+  ]
+}

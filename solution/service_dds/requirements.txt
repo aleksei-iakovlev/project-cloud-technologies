@@ -3,4 +3,4 @@ confluent_kafka
 flask
 psycopg
 psycopg-binary
-# pydantic
+pydantic

@@ -48,6 +48,7 @@ class StgMessageProcessor:
             restaurant_id = order_payload["restaurant"]["id"]
             restaurant_name = self._redis.get(restaurant_id)["name"]
             user_name = self._redis.get(user_id)["name"]
+            user_login = self._redis.get(user_id)["login"]
             menu = self._redis.get(restaurant_id)["menu"]
             categories = {
                     item["_id"]: item["category"]
@@ -81,6 +82,7 @@ class StgMessageProcessor:
                     "user": {
                         "id": user_id,
                         "name": user_name,
+                        "login": user_login,
                     },
                     "products": products,
                 },

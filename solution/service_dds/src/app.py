@@ -20,7 +20,8 @@ if __name__ == '__main__':
     config = AppConfig()
     consumer = config.kafka_consumer()
     producer = config.kafka_producer()
-    dds_repository = DdsRepository(config.pg_warehouse_db())
+    db = config.pg_warehouse_db()
+    dds_repository = DdsRepository(db, config.namespace_uuid)
 
     proc = DdsMessageProcessor(
         consumer,

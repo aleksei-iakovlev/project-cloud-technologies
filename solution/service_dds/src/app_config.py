@@ -25,6 +25,8 @@ class AppConfig:
         self.pg_warehouse_user = str(os.getenv('PG_WAREHOUSE_USER'))
         self.pg_warehouse_password = str(os.getenv('PG_WAREHOUSE_PASSWORD'))
 
+        self.namespace_uuid = str(os.getenv('NAMESPACE_UUID'))
+
     def kafka_producer(self):
         return KafkaProducer(
             self.kafka_host,
