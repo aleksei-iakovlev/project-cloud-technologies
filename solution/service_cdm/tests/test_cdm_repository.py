@@ -12,7 +12,7 @@ def repository_and_cursor():
     connection.cursor.return_value.__enter__.return_value = cursor
     db = MagicMock()
     db.connection.return_value.__enter__.return_value = connection
-    return CdmRepository(db), cursor
+    return CdmRepository(db, "11111111-1111-1111-1111-111111111111"), cursor
 
 
 def test_load_batch_unnests_aligned_product_columns(repository_and_cursor):
@@ -40,10 +40,18 @@ def test_load_batch_unnests_aligned_product_columns(repository_and_cursor):
     assert "%(product_ids)s::text[]" in first_query
     assert "%(product_names)s::text[]" in first_query
     assert "%(category_names)s::text[]" in first_query
+    assert "uuid_generate_v5(%(namespace_uuid)s::uuid, %(user_id)s::text)" in first_query
+    assert "%(user_id)s::uuid" not in first_query
+    assert "uuid_generate_v5(%(namespace_uuid)s::uuid, products.product_id::text)" in first_query
+    assert "products.product_name::varchar" in first_query
     assert "AS products(product_id, product_name, category_name)" in first_query
     assert "%(products)s" not in first_query
     assert "unnest(" in second_query
     assert "AS products(product_id, product_name, category_name)" in second_query
+    assert "uuid_generate_v5(%(namespace_uuid)s::uuid, %(user_id)s::text)" in second_query
+    assert "%(user_id)s::uuid" not in second_query
+    assert "uuid_generate_v5(%(namespace_uuid)s::uuid, products.category_name::text)" in second_query
+    assert "products.category_name::varchar" in second_query
 
     expected_arrays = {
         "product_ids": ["product-1", "product-2"],

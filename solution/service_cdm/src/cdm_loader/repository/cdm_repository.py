@@ -21,9 +21,9 @@ class CdmRepository:
                 order_cnt
             )
             SELECT
-                %(user_id)s::uuid,
-                uuid_generate_v5(%(namespace_uuid)s::uuid, products.product_id),
-                products.product_name,
+                uuid_generate_v5(%(namespace_uuid)s::uuid, %(user_id)s::text),
+                uuid_generate_v5(%(namespace_uuid)s::uuid, products.product_id::text),
+                products.product_name::varchar,
                 1
             FROM unnest(
                 %(product_ids)s::text[],
@@ -50,9 +50,9 @@ class CdmRepository:
                 category_name,
                 order_cnt)
             SELECT
-                %(user_id)s::uuid,
-                uuid_generate_v5(%(namespace_uuid)s::uuid, products.category_name),
-                products.category_name,
+                uuid_generate_v5(%(namespace_uuid)s::uuid, %(user_id)s::text),
+                uuid_generate_v5(%(namespace_uuid)s::uuid, products.category_name::text),
+                products.category_name::varchar,
                 1
             FROM unnest(
                 %(product_ids)s::text[],
@@ -61,7 +61,7 @@ class CdmRepository:
             ) AS products(product_id, product_name, category_name)
             ON CONFLICT (user_id, category_id)
             DO UPDATE SET
-                order_cnt = cdm.user_product_counters.order_cnt + EXCLUDED.order_cnt;
+                order_cnt = cdm.user_category_counters.order_cnt + EXCLUDED.order_cnt;
             """,
                 {
                     "namespace_uuid": self._namespace_uuid,
